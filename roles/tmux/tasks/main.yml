@@ -1,0 +1,18 @@
+- name: make sure tmux is installed
+  package:
+    name: tmux
+    state: present
+
+- name: install tmux plugins
+  command: ~/.local/share/tpm/bin/install_plugins
+  args:
+    creates: ~/.local/share/tmux-plugins
+
+- name: symlink dotfiles
+  file:
+    src: "{{ ansible_env.PWD }}/roles/tmux/files/{{ item }}"
+    path: "~/.{{ item }}"
+    state: link
+    force: yes
+  loop:
+    - tmux.conf

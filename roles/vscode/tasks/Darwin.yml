@@ -1,0 +1,16 @@
+- name: install visual studio code from homebrew
+  homebrew_cask:
+    name: visual-studio-code
+    state: present
+
+- name: symlink files on darwin
+  file:
+    src: "{{ ansible_env.PWD }}/roles/vscode/files/{{ item }}"
+    path: "~/Library/Application Support/Code/User/{{ item }}"
+    state: link
+    follow: false
+    force: yes
+  loop:
+    - keybindings.json
+    - settings.json
+    - snippets

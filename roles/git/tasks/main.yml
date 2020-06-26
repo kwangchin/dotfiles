@@ -1,0 +1,20 @@
+- name: install git from homebrew
+  homebrew_cask:
+    name: git
+    state: present
+
+- name: symlink dotfiles
+  file:
+  src: "{{ ansible_env.PWD }}/roles/tmux/files/{{ item }}"
+  path: "~/.{{ item }}"
+  state: link
+  force: yes
+  loop:
+  - tmux.conf
+
+- name: symlink gitconfig
+  file:
+    src: "{{ ansible_env.PWD }}/roles/git/files/gitconfig"
+    path: ~/.gitconfig
+    state: link
+    force: yes

@@ -1,0 +1,10 @@
+- name: symlink dotfiles
+  file:
+  src: "{{ ansible_env.PWD }}/roles/base/files/{{ item }}"
+  path: "~/.{{ item }}"
+  state: link
+  force: yes
+  loop:
+    - aliases
+    - curlrc
+    - wgetrc

@@ -1,0 +1,13 @@
+- name: install vim from homebrew
+  homebrew:
+    name: vim
+    state: present
+
+- name: symlink dotfiles
+  file:
+    src: "{{ ansible_env.PWD }}/roles/vim/files/{{ item }}"
+    path: "~/.{{ item }}"
+    state: link
+    force: yes
+  loop:
+    - vimrc

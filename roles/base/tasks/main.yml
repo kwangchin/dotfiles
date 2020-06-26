@@ -1,0 +1,98 @@
+---
+- name: load custom vars
+  include_vars: ./vars.yml
+  tags:
+    - always
+
+- name: allow sudo without password
+  lineinfile: 'dest=/etc/sudoers state=present line="{{ ansible_user_id }}	ALL=NOPASSWD: ALL" insertafter="^%admin\tALL=\(ALL\) ALL" validate="visudo -cf %s"'
+  become: yes
+  when: sudo_without_password and ansible_os_family == "Darwin"
+
+- name: enable tty_tickets
+  lineinfile: 'dest=/etc/sudoers state=present line="Defaults tty_tickets" validate="visudo -cf %s"'
+  become: yes
+  when: ansible_os_family == "Darwin"
+
+- name: install oh-my-zsh
+  git: repo=https://github.com/robbyrussell/oh-my-zsh.git dest=~/.local/share/oh-my-zsh update=yes
+
+- name: install powerlevel10 theme
+  git: repo=https://github.com/romkatv/powerlevel10k.git dest=~/.local/share/oh-my-zsh/custom/themes/powerlevel10k
+
+- name: install fzf-marks theme
+  git: repo=https://github.com/urbainvaes/fzf-marks.git dest=~/.local/share/oh-my-zsh/custom/plugins/fzf-marks
+
+- name: install zsh-autosuggestions theme
+  git: repo=https://github.com/zsh-users/zsh-autosuggestions.git dest=~/.local/share/oh-my-zsh/custom/plugins/zsh-autosuggestions
+
+- name: install zsh-syntaxhighlighting theme
+  git: repo=https://github.com/zsh-users/zsh-syntax-highlighting.git dest=~/.local/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+
+- name: install tmux plugin manager
+  git: repo=https://github.com/tmux-plugins/tpm.git dest=~/.local/share/tpm update=yes
+
+- name: create folder
+  file: path={{item}} state=directory
+  with_items:
+    - "~/.cache/bash/"
+    - "~/.cache/vim/"
+    - "~/.cache/vim/backup/"
+    - "~/.cache/vim/dein/"
+    - "~/.cache/vim/swap/"
+    - "~/.cache/vim/undo/"
+    - "~/.cache/wget/"
+    - "~/.config/karabiner/"
+    - "~/.config/vscode/"
+    - "~/.local/share/zsh/"
+    - "~/Library/Application Support/Code/User/"
+
+# - include: tasks/link_files.yml
+#   tags:
+#     - links
+
+# - include: tasks/packages.yml
+#   tags:
+#     - packages
+
+# # Needs to be after packages
+# - include: tasks/tmux_plugins.yml
+#   tags:
+#     - tmux_plugins
+
+# - include: tasks/shells.yml
+#   tags:
+#     - shells
+
+# - include: tasks/macos_defaults.yml
+#   when: ansible_os_family == "Darwin"
+#   tags:
+#     - macos_defaults
+
+# - include: tasks/arch.yml
+#   when: ansible_os_family == "Archlinux"
+#   tags:
+#     - arch
+
+# - include: tasks/dnscrypt.yml
+#   when: use_dnscrypt and ansible_os_family == "Darwin"
+#   tags:
+#     - dnscrypt
+
+- name: kill Dock
+  command: killall Dock
+
+- name: kill Finder
+  command: killall Finder
+
+- name: kill Transmission
+  command: killall Transmission
+  ignore_errors: yes
+
+- name: kill Safari
+  command: killall Safari
+  ignore_errors: yes
+
+- name: Kill Terminal
+  command: killall Terminal
+  ignore_errors: yes

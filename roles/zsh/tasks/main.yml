@@ -1,0 +1,47 @@
+- name: check if oh-my-zsh is installed
+  stat:
+    path: ~/.oh-my-zsh
+  register: ohmyzsh
+
+- name: install oh-my-zsh
+  block:
+    - name: download oh-my-zsh
+      get_url:
+        url: https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh
+        dest: /tmp/install.sh
+        mode: '+x'
+    - name: install oh-my-zsh
+      command: sh /tmp/install.sh
+  always:
+    - name: delete oh-my-zsh
+      file:
+        path: /tmp/install.sh
+        state: absent
+  when: ohmyzsh.stat.exists == False
+
+- name: symlink dotfiles
+  file:
+    src: "{{ ansible_env.PWD }}/roles/zsh/files/{{ item }}"
+    path: "~/.{{ item }}"
+    state: link
+    force: yes
+  loop:
+    - zshrc
+
+- name: install fzf-marks plugin
+  git:
+    repo: https://github.com/urbainvaes/fzf-marks
+    dest: ~/.oh-my-zsh/plugins/fzf-marks
+    accept_hostkey: yes
+
+- name: install zsh-autosuggestions plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: ~/.oh-my-zsh/plugins/zsh-autosuggestions
+    accept_hostkey: yes
+
+- name: install zsh-syntax-highlighting plugin
+  git:
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting
+    dest: ~/.oh-my-zsh/plugins/zsh-syntax-highlighting
+    accept_hostkey: yes
