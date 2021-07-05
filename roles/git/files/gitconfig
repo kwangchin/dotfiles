@@ -1,3 +1,15 @@
 [user]
-    email = kwangchin@gmail.com
-    name = Chin Lee
+	email = Lee_Kwang_Chin@tech.gov.sg
+	name = Kwang Chin Lee
+[difftool "sourcetree"]
+	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --nosplash \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/DiffMerge.app/Contents/MacOS/DiffMerge --merge --result=\"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+	trustExitCode = true
+[pull]
+	rebase = false
+[core]
+	excludesfile = /Users/chin/.gitignore
+[commit]
+	template = /Users/chin/.stCommitMsg

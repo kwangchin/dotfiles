@@ -20,13 +20,16 @@
 - name: install powerlevel10 theme
   git: repo=https://github.com/romkatv/powerlevel10k.git dest=~/.local/share/oh-my-zsh/custom/themes/powerlevel10k
 
-- name: install fzf-marks theme
+- name: install expand-aliases-oh-my-zsh plugin
+  git: repo=https://github.com/jarmo/expand-aliases-oh-my-zsh.git dest=~/.local/share/oh-my-zsh/custom/plugins/expand-aliases
+
+- name: install fzf-marks plugin
   git: repo=https://github.com/urbainvaes/fzf-marks.git dest=~/.local/share/oh-my-zsh/custom/plugins/fzf-marks
 
-- name: install zsh-autosuggestions theme
+- name: install zsh-autosuggestions plugin
   git: repo=https://github.com/zsh-users/zsh-autosuggestions.git dest=~/.local/share/oh-my-zsh/custom/plugins/zsh-autosuggestions
 
-- name: install zsh-syntaxhighlighting theme
+- name: install zsh-syntaxhighlighting plugin
   git: repo=https://github.com/zsh-users/zsh-syntax-highlighting.git dest=~/.local/share/oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
 - name: install tmux plugin manager

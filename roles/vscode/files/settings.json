@@ -1,3 +1,45 @@
 {
-    "terminal.integrated.fontFamily": "'Meslo LG S for Powerline'"
+    "terminal.integrated.fontFamily": "'Meslo LG S for Powerline'",
+    "yaml.schemas": {
+        "file:///Users/chin/.vscode/extensions/atlassian.atlascode-2.6.5/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "atlascode.jira.enabled": true,
+    "atlascode.jira.lastCreateSiteAndProject": {
+        "siteId": "",
+        "projectKey": ""
+    },
+    "latex-workshop.view.pdf.viewer": "tab",
+    "[javascript]": {
+        "editor.defaultFormatter": "schroeter.prettier-vscode-space-parenthesis"
+    },
+    "python.showStartPage": false,
+	"jupyter.interactiveWindowMode": "perFile",
+	"settingsSync.ignoredSettings": [
+
+    ],
+    "[python]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 4
+	},
+    "editor.detectIndentation": false,
+    "workbench.editorAssociations": {
+        "*.ipynb": "jupyter.notebook.ipynb"
+    },
+    "[yaml]": {
+    	"files.eol": "\r\n",
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": false,
+        "gitlens.codeLens.scopes": [
+            "document"
+        ],
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        }
+	},
+    "workbench.editor.enablePreview": false,
+    "window.zoomLevel": 1,
+    "workbench.startupEditor": "none"
 }
