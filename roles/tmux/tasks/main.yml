@@ -3,11 +3,6 @@
     name: tmux
     state: present
 
-- name: install tmux plugins
-  command: ~/.local/share/tpm/bin/install_plugins
-  args:
-    creates: ~/.local/share/tmux-plugins
-
 - name: symlink dotfiles
   file:
     src: "{{ ansible_env.PWD }}/roles/tmux/files/{{ item }}"
@@ -16,3 +11,8 @@
     force: yes
   loop:
     - tmux.conf
+
+- name: install tmux plugins
+  command: ~/.local/share/tpm/bin/install_plugins
+  args:
+    creates: ~/.local/share/tmux-plugins
