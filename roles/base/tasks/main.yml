@@ -40,7 +40,9 @@
   with_items:
     - "~/.cache/bash/"
     - "~/.cache/vim/"
+    - "~/.cache/vim/autoload/"
     - "~/.cache/vim/backup/"
+    - "~/.cache/vim/colors/"
     - "~/.cache/vim/dein/"
     - "~/.cache/vim/swap/"
     - "~/.cache/vim/undo/"

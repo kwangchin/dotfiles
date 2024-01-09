@@ -3,7 +3,7 @@
     name: vim
     state: present
 
-- name: symlink dotfiles
+- name: symlink .vimrc
   file:
     src: "{{ ansible_env.PWD }}/roles/vim/files/{{ item }}"
     path: "~/.{{ item }}"
@@ -11,3 +11,15 @@
     force: yes
   loop:
     - vimrc
+
+- name: symlink plug.vim
+  file:
+    src: "{{ ansible_env.PWD }}/roles/vim/files/{{ item }}"
+    path: "~/.cache/vim/autoload/plug.vim"
+    state: link
+    force: yes
+  loop:
+    - plugvim
+
+- name: install plugins
+  command: vim +"PlugInstall --sync" +qa
